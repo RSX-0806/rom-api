@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Console {
+  id      Int    @id @default(autoincrement())
+  name    String
+  image   String
+  url     String @unique @default("")
+  company String
+  Game    Game[]
+  Rom     Rom[]
+}
+
+model Game {
+  id          String  @id
+  title       String  @unique
+  genre       String
+  rating      Float
+  release     String
+  publisher   String
+  platformId  Int
+  description String
+  Console     Console @relation(fields: [platformId], references: [id])
+  Rom         Rom[]
+}
+
+model Rom {
+  sha256     String  @id
+  filename   String  @unique
+  size       String
+  crc        String  @unique
+  md5        String  @unique
+  sha1       String  @unique
+  image      String
+  platformId Int
+  gameId     String
+  url        String
+  Game       Game    @relation(fields: [gameId], references: [id])
+  Console    Console @relation(fields: [platformId], references: [id])
+
+  @@unique([sha256, url], map: "rom_url_unique_constraint")
+}
