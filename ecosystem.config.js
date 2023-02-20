@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    script: 'yarn build && yarn start',
+    script: 'sudo yarn build && sudo yarn start',
     name: 'rom-api'
   }],
 };
