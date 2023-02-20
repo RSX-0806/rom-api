@@ -32,8 +32,6 @@ function HomePage({games}: InferGetStaticPropsType<typeof getStaticProps>) {
   		</tr>
   	</thead>
   	<tbody>
-  	
-
         {games.map((game: Game, i: number) => {
            return  <tr key={i}>
                 <td>{game.title}</td>
@@ -42,11 +40,8 @@ function HomePage({games}: InferGetStaticPropsType<typeof getStaticProps>) {
                 <td>{game.publisher}</td>
             </tr>
         })}
-        <tbody>
-    
+    </tbody>
     </table>)
 }
 
-
-export default HomePage
-
+export default HomePage;
